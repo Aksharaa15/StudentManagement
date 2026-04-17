@@ -1,0 +1,67 @@
+import java.util.*;
+
+class Quiz {
+    String question;
+    String[] options;
+    int answer;
+
+    Quiz(String q, String[] opt, int ans) {
+        question = q;
+        options = opt;
+        answer = ans;
+    }
+}
+
+public class OnlineQuiz {
+
+    static Scanner sc = new Scanner(System.in);
+    static ArrayList<Quiz> list = new ArrayList<>();
+    static int score = 0;
+
+    static void load() {
+        list.add(new Quiz("Java is?",
+                new String[]{"1. Language", "2. Animal", "3. Car", "4. Food"}, 1));
+
+        list.add(new Quiz("2+2?",
+                new String[]{"1. 3", "2. 4", "3. 5", "4. 6"}, 2));
+    }
+
+    static void startQuiz() {
+        score = 0;
+
+        for (Quiz q : list) {
+            System.out.println("\n" + q.question);
+
+            for (String opt : q.options) {
+                System.out.println(opt);
+            }
+
+            int ans = sc.nextInt();
+
+            if (ans == q.answer) {
+                score++;
+            }
+        }
+
+        System.out.println("Score: " + score);
+    }
+
+    public static void main(String[] args) {
+
+        load();
+
+        while (true) {
+            System.out.println("\n--- QUIZ SYSTEM ---");
+            System.out.println("1. Start Quiz");
+            System.out.println("2. Exit");
+
+            int ch = sc.nextInt();
+
+            switch (ch) {
+                case 1: startQuiz(); break;
+                case 2: return;
+                default: System.out.println("Invalid");
+            }
+        }
+    }
+}
